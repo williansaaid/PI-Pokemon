@@ -1,31 +1,29 @@
 const { Router } = require('express');
-const { getAllPokemons } = require('../controllers/logic');
+const { getGeneralInfoPokemons, getDetailedInfoPokemon } = require('../controllers/logic');
 const { Pokemon, Types } = require('../db');
 const router = Router();
 
 router.get('/', async (req, res) => {
     try {
         const { name } = req.query;
-        let pokemons = await getAllPokemons();
+        let allPokemons = await getGeneralInfoPokemons();
         if( name ){
-            let findPokemon = pokemons.filter(pk =>
-                pk.name.toLowerCase().includes(name.toLowerCase())
-            );
-            findPokemon.length > 0 ?
+            let findPokemon = await getDetailedInfoPokemon(name.toLowerCase());
+            findPokemon ?
             res.status(200).send(findPokemon):
             res.status(404).send('No encontramos ese Pokémon en la Pokédex :(')
         } else {
-            res.status(200).send(pokemons);
+            res.status(200).send(allPokemons);
         }
     } catch (error) {
         res.status(404).send(error);
     }
 });
+
 router.get('/:idPokemon', async (req, res) => {
     try {
         const { idPokemon } = req.params;
-        let pokemons = await getAllPokemons();
-        let findPokemon = pokemons.find(pk => parseInt(pk.id) === parseInt(idPokemon));
+        let findPokemon = await getDetailedInfoPokemon(idPokemon);
         findPokemon ?
         res.status(200).send(findPokemon):
         res.status(404).send('No encontramos ese Pokémon en la Pokédex :(')
@@ -33,6 +31,7 @@ router.get('/:idPokemon', async (req, res) => {
         res.status(404).send(error);
     }
 });
+
 router.post('/', async (req, res) => {
     let {
         image,
@@ -43,10 +42,9 @@ router.post('/', async (req, res) => {
         defense,
         speed,
         height,
-        weight,
-        abilities
+        weight
     } = req.body;
-    if ( !image || !name || !types || !hp || !attack || !defense || !speed || !height || !weight || !abilities ){
+    if ( !image || !name || !types || !hp || !attack || !defense || !speed || !height || !weight ){
         return res.status(404).send("Falta enviar datos obligatorios")
     };
     try {
@@ -58,8 +56,7 @@ router.post('/', async (req, res) => {
             defense,
             speed,
             height,
-            weight,
-            abilities
+            weight
         });
         let pokemonType = await Types.findAll({
             where: {name: types}

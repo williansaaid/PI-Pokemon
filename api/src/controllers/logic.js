@@ -1,42 +1,121 @@
 const { Pokemon, Types } = require('../db');
 const axios = require('axios');
 
-const limit = 15;
+const limit = 50;
+let url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}`;
 
-const getInfoFromAPI = async () => {
-    let url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}`;
+const getGeneralInfoFromAPI = async () => {
     const responseApi = await axios.get(url);
     const result = responseApi.data.results;
     const allPokemons = [];
 
     for(let pk of result){
-        const pkDetail = await axios.get(pk.url);
+        const pkGeneral = await axios.get(pk.url);
         allPokemons.push({
-            id: pkDetail.data.id,
-            image: pkDetail.data.sprites.front_default,
-            name: pkDetail.data.name,
-            type: pkDetail.data.types.map(e => e.type.name),
-            hp: pkDetail.data.stats[0].base_stat,
-            attack: pkDetail.data.stats[1].base_stat,
-            defense: pkDetail.data.stats[2].base_stat,
-            speed: pkDetail.data.stats[5].base_stat,
-            height: pkDetail.data.height / 10,
-            weight: pkDetail.data.weight / 10,
-            abilities: pkDetail.data.abilities.map(e => e.ability.name)
+            id: pkGeneral.data.id,
+            image: pkGeneral.data.sprites.front_default,
+            name: pkGeneral.data.name,
+            types: pkGeneral.data.types.map(e => e.type.name),
         })
     }
     return allPokemons;
 }
 
-const getInfoFromDB = async () => {
-    return await Pokemon.findAll();
+const getGeneralInfoFromDB = async () => {
+    const pokemonDb = await Pokemon.findAll({
+        attributes: ['id', 'image', 'name'],
+        include: {
+            model: Types,
+            attributes: ['name'],
+            through: {
+                attributes: [],
+            }
+        }
+    });
+
+    const infoDb = pokemonDb.map(pk => {
+        return {
+            id: pk.dataValues.id,
+            image: pk.dataValues.image,
+            name: pk.dataValues.name,
+            types: pk.dataValues.Types.map(e => e.name)
+        }
+    })
+    return infoDb;
 }
 
-const getAllPokemons = async () => {
-    const infoFromApi = await getInfoFromAPI();
-    const infoFromDB = await getInfoFromDB();
+const getDetailedInfoFromAPI = async (param) => {
+    const detailsUrl = `https://pokeapi.co/api/v2/pokemon/${param}`;
+    let response;
+    try {
+        const responseApi = await axios.get(detailsUrl);
+        const pkDetail = await responseApi.data;
+        return response = {
+            id: pkDetail.id,
+            image: pkDetail.sprites.front_default,
+            name: pkDetail.name,
+            types: pkDetail.types.map(e => e.type.name),
+            hp: pkDetail.stats[0].base_stat,
+            attack: pkDetail.stats[1].base_stat,
+            defense: pkDetail.stats[2].base_stat,
+            speed: pkDetail.stats[5].base_stat,
+            height: pkDetail.height / 10,
+            weight: pkDetail.weight / 10,
+            abilities: pkDetail.abilities.map(e => e.ability.name)
+        };
+    } catch (error) {
+        return response = undefined;
+    }
+}
+
+const getDetailedInfoFromDB = async (param) => {
+    let pokemonDb = await Pokemon.findAll({
+        include: {
+            model: Types,
+            attributes: ['name'],
+            through: {
+                attributes: [],
+            }
+        }
+    });
+
+    let infoDb = pokemonDb.map(pk => {
+        return {
+            id: pk.dataValues.id,
+            image: pk.dataValues.image,
+            name: pk.dataValues.name,
+            types: pk.dataValues.Types.map(e => e.dataValues.name),
+            hp: pk.dataValues.hp,
+            attack: pk.dataValues.attack,
+            defense: pk.dataValues.defense,
+            speed: pk.dataValues.speed,
+            height: pk.dataValues.height / 10,
+            weight: pk.dataValues.weight / 10
+        }
+    })
+
+    if(param.length > 30){
+        let findPokemon = infoDb.find(pk => pk.id.toLowerCase() === param);
+        return findPokemon;
+    } else {
+        let findPokemon = infoDb.find(pk => pk.name.toLowerCase() === param);
+        return findPokemon;
+    }
+}
+
+const getGeneralInfoPokemons = async () => {
+    const infoFromApi = await getGeneralInfoFromAPI();
+    const infoFromDB = await getGeneralInfoFromDB();
     const allPokemons = infoFromApi.concat(infoFromDB);
     return allPokemons;
+}
+
+const getDetailedInfoPokemon = async (param) => {
+    const infoFromApi = await getDetailedInfoFromAPI(param);
+    const infoFromDB = await getDetailedInfoFromDB(param);
+    let pokemonDetailed;
+    infoFromApi ? pokemonDetailed = infoFromApi : pokemonDetailed = infoFromDB;
+    return pokemonDetailed;
 }
 
 const getPokemonTypes = async () => {
@@ -55,8 +134,11 @@ const getPokemonTypes = async () => {
 
 
 module.exports = {
-    getInfoFromAPI,
-    getInfoFromDB,
-    getAllPokemons,
+    getGeneralInfoFromAPI,
+    getGeneralInfoFromDB,
+    getDetailedInfoFromAPI,
+    getDetailedInfoFromDB,
+    getGeneralInfoPokemons,
+    getDetailedInfoPokemon,
     getPokemonTypes
 };
