@@ -1,0 +1,63 @@
+.navbar {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+    padding: 1rem;
+    overflow: hidden;
+    margin: 0;
+    box-sizing: border-box;
+    background-color: antiquewhite;
+}
+
+.search {
+    display: flex;
+    height: 30px;
+}
+#searchAndFilter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+#refreshAndCreate{
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+#searchButton {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+}
+
+#refreshIcon {
+    width: 20px;
+}
+
+#refresh {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+}
+
+#create {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+#logo {
+    width: 150px;
+}
+
+#createIcon {
+    width: 15px;
+}
+
+#searchIcon {
+    width: 15px;
+}
