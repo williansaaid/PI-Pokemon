@@ -13,7 +13,7 @@ const getGeneralInfoFromAPI = async () => {
         const pkGeneral = await axios.get(pk.url);
         allPokemons.push({
             id: pkGeneral.data.id,
-            image: pkGeneral.data.sprites.front_default,
+            image: pkGeneral.data.sprites.other["official-artwork"].front_default,
             name: pkGeneral.data.name,
             types: pkGeneral.data.types.map(e => e.type.name),
         })
@@ -52,7 +52,7 @@ const getDetailedInfoFromAPI = async (param) => {
         const pkDetail = await responseApi.data;
         return response = {
             id: pkDetail.id,
-            image: pkDetail.sprites.front_default,
+            image: pkDetail.sprites.other["official-artwork"].front_default,
             name: pkDetail.name,
             types: pkDetail.types.map(e => e.type.name),
             hp: pkDetail.stats[0].base_stat,
