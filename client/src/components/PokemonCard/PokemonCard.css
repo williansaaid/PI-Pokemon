@@ -1,7 +1,7 @@
 .card {
-    width: 250px;
-    height: 250px;
-    border: 5px solid black;
+    width: 20rem;
+    height: 20rem;
+    border: 4px double #FFCB05;
     border-radius: 10px;
     background: url("https://pbs.twimg.com/media/DVMT-6OXcAE2rZY.jpg");
     background-size: cover;
@@ -10,5 +10,5 @@
 }
 
 .image {
-    width: 70px;
+    width: 7rem;
 }

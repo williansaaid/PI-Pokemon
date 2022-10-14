@@ -1,4 +1,8 @@
 .home {
+    background-image: radial-gradient(black, #0D1371);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
     display: flex;
     flex-direction: column;
     align-content: space-around;

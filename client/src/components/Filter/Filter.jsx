@@ -3,7 +3,7 @@ import "./Filter.css";
 
 const Filter = () => {
     return (
-        <div className="container">
+        <div className="containerFilter">
             <select className="filter" defaultValue={""}>
                 <option value={""} disabled>A - Z</option>
                 <option value={"asc"}>Ascending</option>
