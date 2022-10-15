@@ -16,6 +16,8 @@ const getGeneralInfoFromAPI = async () => {
             image: pkGeneral.data.sprites.other["official-artwork"].front_default,
             name: pkGeneral.data.name,
             types: pkGeneral.data.types.map(e => e.type.name),
+            attack: pkGeneral.data.stats[1].base_stat,
+            defense: pkGeneral.data.stats[2].base_stat
         })
     }
     return allPokemons;
@@ -23,7 +25,7 @@ const getGeneralInfoFromAPI = async () => {
 
 const getGeneralInfoFromDB = async () => {
     const pokemonDb = await Pokemon.findAll({
-        attributes: ['id', 'image', 'name'],
+        attributes: ['id', 'image', 'name', 'attack', 'defense'],
         include: {
             model: Types,
             attributes: ['name'],

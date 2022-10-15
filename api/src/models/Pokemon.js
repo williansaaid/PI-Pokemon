@@ -35,6 +35,11 @@ module.exports = (sequelize) => {
     },
     weight: {
       type: DataTypes.FLOAT
+    },
+    createdInDb: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true
     }
   }, { timestamps: false });
 };
