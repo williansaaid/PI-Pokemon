@@ -1,7 +1,11 @@
 body {
-  box-sizing: border-box;
+  background: radial-gradient(black, #0D1371);
   background-color: #0D1371;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  box-sizing: border-box;
   margin: 0;
+  height: 100%;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;

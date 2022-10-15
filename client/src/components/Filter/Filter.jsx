@@ -1,16 +1,24 @@
 import React from "react";
+// import { useDispatch } from "react-redux";
+// import { filterTypePokemon } from "../../redux/actions";
 import "./Filter.css";
 
-const Filter = () => {
+const Filter = ({handleFilterType, handleFilterCreation, handleFilterAlphabetic, handleFilterAttack, handleFilterDefense}) => {
+    // const dispatch = useDispatch();
+
+    // function handleFilterType(event){
+    //     dispatch(filterTypePokemon(event.target.value))
+    // }
+
     return (
         <div className="containerFilter">
-            <select className="filter" defaultValue={""}>
-                <option value={""} disabled>A - Z</option>
-                <option value={"asc"}>Ascending</option>
-                <option value={"dsc"}>Descending</option>
+            <select className="filter" defaultValue={""} onChange={handleFilterAlphabetic}>
+                <option value={""}>Alphabetic Order</option>
+                <option value={"a-z"}>A - Z</option>
+                <option value={"z-a"}>Z - A</option>
             </select>
-            <select className="filter" defaultValue={""}>
-                <option value={""} disabled>Type</option>
+            <select className="filter" defaultValue={"allTypes"} onChange={handleFilterType}>
+                <option value={"allTypes"}>Type</option>
                 <option value={"normal"}>Normal</option>
                 <option value={"fire"}>Fire</option>
                 <option value={"water"}>Water</option>
@@ -32,20 +40,20 @@ const Filter = () => {
                 <option value={"shadow"}>Shadow</option>
                 <option value={"unknown"}>Unknown</option>
             </select>
-            <select className="filter" defaultValue={""}>
-                <option value={""} disabled>Attack</option>
-                <option value={"max"}>Max Attack</option>
-                <option value={"min"}>Min Attack</option>
+            <select className="filter" defaultValue={""} onChange={handleFilterAttack}>
+                <option value={""}>Attack</option>
+                <option value={"maxAtk"}>Max Attack</option>
+                <option value={"minAtk"}>Min Attack</option>
             </select>
-            <select className="filter" defaultValue={""}>
-                <option value={""} disabled>Defense</option>
-                <option value={"max"}>Max Defense</option>
-                <option value={"min"}>Min Defense</option>
+            <select className="filter" defaultValue={""} onChange={handleFilterDefense}>
+                <option value={""}>Defense</option>
+                <option value={"maxDef"}>Max Defense</option>
+                <option value={"minDef"}>Min Defense</option>
             </select>
-            <select className="filter" defaultValue={""}>
-                <option value={""} disabled>All</option>
-                <option value={"asc"}>Originals</option>
-                <option value={"dsc"}>Created</option>
+            <select className="filter" defaultValue={"all"} onChange={handleFilterCreation}>
+                <option value={"all"}>All</option>
+                <option value={"api"}>Originals</option>
+                <option value={"db"}>Created</option>
             </select>
         </div>
     )

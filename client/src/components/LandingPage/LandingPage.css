@@ -1,12 +1,10 @@
-body {
+.containerLanding {
+    height: 100%;
     box-sizing: border-box;
     background-image: url("https://images.alphacoders.com/963/963324.png");
     background-position: center center;
     background-attachment: fixed;
     background-size: cover;
-}
-
-.containerLanding {
     display: flex;
     align-items: center;
     justify-content: space-around;

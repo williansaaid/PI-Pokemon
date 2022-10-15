@@ -1,4 +1,8 @@
 body {
+  background: radial-gradient(black, #0D1371);
+  background-color: #050a4d;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
   margin: 0;
   height: 100%;
   width: 100%;

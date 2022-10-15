@@ -1,0 +1,32 @@
+.paginationBar {
+    height: auto;
+    width: auto;
+    background-color: #EEEEA5;
+    padding: 0.3rem 2rem;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+}
+
+.buttonPagination {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    color: #0D1371;
+    background-color: transparent;
+    font-size: 1rem;
+    transition: ease-in 0.2s;
+}
+
+.buttonPagination:hover {
+    background-color: #ffffa0;
+    transition: ease-in 0.1s;
+}
+
+#active {
+    background-color: #0D1371;
+    color: #EEEEA5;
+    transition: ease-in 0.5s;
+}

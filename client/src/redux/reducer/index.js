@@ -1,7 +1,8 @@
-import { GET_ALL_POKEMONS } from "../actions";
+import { FILTER_ALPHABETIC, FILTER_BY_ATTACK, FILTER_BY_CREATION, FILTER_BY_DEFENSE, FILTER_BY_TYPE, GET_ALL_POKEMONS } from "../actions";
 
 const initialState = {
-    pokemons: []
+    pokemons: [],
+    allPokemons: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -9,8 +10,91 @@ const rootReducer = (state = initialState, action) => {
         case GET_ALL_POKEMONS:
             return {
                 ...state,
-                pokemons: action.payload
+                pokemons: action.payload,
+                allPokemons: action.payload
             };
+
+        case FILTER_BY_TYPE: {
+            const allPokemons = state.allPokemons;
+            const filteredByType = action.payload === "allTypes" ?
+            allPokemons :
+            allPokemons.filter(pk =>{
+                return pk.types.find(type => type === action.payload) === action.payload
+            });
+            return {
+                ...state,
+                pokemons: filteredByType
+            };
+        }
+
+        case FILTER_BY_ATTACK: {
+            const filteredAttack = action.payload === "minAtk" ?
+            state.pokemons.sort(function(a, b){
+                if(a.attack > b.attack) return 1;
+                if(b.attack > a.attack) return -1;
+                return 0;
+            }) :
+            state.pokemons.sort(function(a, b){
+                if(a.attack > b.attack) return -1;
+                if(b.attack > a.attack) return 1;
+                return 0;
+            });
+            return {
+                ...state,
+                pokemons: filteredAttack
+            }
+        }
+
+
+        case FILTER_BY_DEFENSE: {
+            const filteredDefense = action.payload === "minDef" ?
+            state.pokemons.sort(function(a, b){
+                if(a.defense > b.defense) return 1;
+                if(b.defense > a.defense) return -1;
+                return 0;
+            }) :
+            state.pokemons.sort(function(a, b){
+                if(a.defense > b.defense) return -1;
+                if(b.defense > a.defense) return 1;
+                return 0;
+            });
+            console.log(filteredDefense);
+            return {
+                ...state,
+                pokemons: filteredDefense
+            }
+        }
+
+        case FILTER_ALPHABETIC: {
+            const filteredAlphabetic = action.payload === "a-z" ?
+            state.pokemons.sort(function(a, b){
+                if(a.name > b.name) return 1;
+                if(b.name > a.name) return -1;
+                return 0;
+            }) :
+            state.pokemons.sort(function(a, b){
+                if(a.name > b.name) return -1;
+                if(b.name > a.name) return 1;
+                return 0;
+            });
+            return {
+                ...state,
+                pokemons: filteredAlphabetic
+            }
+        }
+
+        case FILTER_BY_CREATION: {
+            const allPokemons = state.allPokemons;
+            const filteredByCreation = action.payload === "db" ?
+            allPokemons.filter(pk => pk.createdInDb) :
+            allPokemons.filter(pk => !pk.createdInDb);
+            console.log(filteredByCreation);
+            return {
+                ...state,
+                pokemons: action.payload === "all" ? state.allPokemons : filteredByCreation
+            }
+        }
+
         default:
             return { ...state };
     };
