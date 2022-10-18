@@ -9,6 +9,9 @@ export const FILTER_BY_CREATION = "FILTER_BY_CREATION";
 export const GET_POKEMON_BY_NAME = "GET_POKEMON_BY_NAME";
 export const GET_POKEMONS_TYPES = "GET_POKEMONS_TYPES";
 export const CREATE_POKEMON = "CREATE_POKEMON";
+export const GET_POKEMON_DETAIL = "GET_POKEMON_DETAIL";
+export const CLEAN_DETAIL = "CLEAN_DETAIL";
+export const CLEAN_POKEMONS_HOME = "CLEAN_POKEMONS_HOME";
 
 export const getAllPokemons = () => {
     return async function (dispatch){
@@ -35,6 +38,20 @@ export const getPokemonByName = (payload) => {
         } catch (error) {
             console.log(error);
             alert(`We could not find "${payload}" in our Pokédex :(`)
+        }
+    }
+}
+
+export const getPokemonDetail = (payload) => {
+    return async function (dispatch){
+        try {
+            const response = await axios(`http://localhost:3001/pokemons/${payload}`)
+            dispatch({
+                type: GET_POKEMON_DETAIL,
+                payload: response.data
+            })
+        } catch (error) {
+            console.log(error);
         }
     }
 }
@@ -87,6 +104,7 @@ export const filterByDefense = (payload) => {
         payload
     }
 }
+
 export const filterAlphabetic = (payload) => {
     return {
         type: FILTER_ALPHABETIC,
@@ -98,5 +116,17 @@ export const filterByCreation = (payload) => {
     return {
         type: FILTER_BY_CREATION,
         payload
+    }
+}
+
+export const cleanDetail = () => {
+    return {
+        type: CLEAN_DETAIL
+    }
+}
+
+export const cleanPokemonsHome = () => {
+    return {
+        type: CLEAN_POKEMONS_HOME
     }
 }

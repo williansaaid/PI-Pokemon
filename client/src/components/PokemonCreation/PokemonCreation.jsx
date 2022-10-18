@@ -4,10 +4,8 @@ import { Link, useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPokemonsTypes, createPokemon } from "../../redux/actions";
+import { icons, capitalizeFirst } from "../../helpers/utils";
 
-const capitalizeFirst = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
 
 const PokemonCreation = () => {
     const dispatch = useDispatch();
@@ -106,9 +104,10 @@ const PokemonCreation = () => {
         })
     }
 
-    function handleClearTypes(){
+    function handleClearType(element){
         setInput({
-            types: []
+            ...input,
+            types: input.types.filter(type => type !== element)
         })
     }
 
@@ -230,12 +229,14 @@ const PokemonCreation = () => {
                     <p>{formErrors.types}</p>
                 </div>
                 <div>
-                    <ul>
+                    <div>
                         {input.types.map((type, key) => {
-                            return <li key={key}>{type}</li>
+                            return <div key={key}>
+                                <p>{type}</p>
+                                <button onClick={() => handleClearType(type)}>X</button>
+                            </div>
                         })}
-                    </ul>
-                    <button onClick={handleClearTypes}>Clear Types</button>
+                    </div>
                 </div>
                 <button type="submit">Create Pokémon</button>
             </form>

@@ -1,9 +1,10 @@
-import { FILTER_ALPHABETIC, FILTER_BY_ATTACK, FILTER_BY_CREATION, FILTER_BY_DEFENSE, FILTER_BY_TYPE, GET_ALL_POKEMONS, GET_POKEMONS_TYPES, GET_POKEMON_BY_NAME, CREATE_POKEMON } from "../actions";
+import { FILTER_ALPHABETIC, FILTER_BY_ATTACK, FILTER_BY_CREATION, FILTER_BY_DEFENSE, FILTER_BY_TYPE, GET_ALL_POKEMONS, GET_POKEMONS_TYPES, GET_POKEMON_BY_NAME, CREATE_POKEMON, GET_POKEMON_DETAIL, CLEAN_DETAIL, CLEAN_POKEMONS_HOME } from "../actions";
 
 const initialState = {
     pokemons: [],
     allPokemons: [],
-    types: []
+    types: [],
+    detail: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -21,6 +22,12 @@ const rootReducer = (state = initialState, action) => {
                 pokemons: [action.payload]
             }
 
+        case GET_POKEMON_DETAIL:
+            return {
+                ...state,
+                detail: action.payload
+            }
+
         case GET_POKEMONS_TYPES:
             return {
                 ...state,
@@ -29,7 +36,8 @@ const rootReducer = (state = initialState, action) => {
 
         case CREATE_POKEMON:
             return {
-                ...state
+                ...state,
+                detail: action.payload
             }
 
         case FILTER_BY_TYPE: {
@@ -63,7 +71,6 @@ const rootReducer = (state = initialState, action) => {
             }
         }
 
-
         case FILTER_BY_DEFENSE: {
             const filteredDefense = action.payload === "minDef" ?
             state.pokemons.sort(function(a, b){
@@ -76,7 +83,6 @@ const rootReducer = (state = initialState, action) => {
                 if(b.defense > a.defense) return 1;
                 return 0;
             });
-            console.log(filteredDefense);
             return {
                 ...state,
                 pokemons: filteredDefense
@@ -111,6 +117,18 @@ const rootReducer = (state = initialState, action) => {
                 pokemons: action.payload === "all" ? state.allPokemons : filteredByCreation
             }
         }
+
+        case CLEAN_DETAIL:
+            return {
+                ...state,
+                detail: []
+            }
+
+        case CLEAN_POKEMONS_HOME:
+            return {
+                ...state,
+                pokemons: []
+            }
 
         default:
             return { ...state };

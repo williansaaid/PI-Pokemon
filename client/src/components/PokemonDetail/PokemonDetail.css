@@ -1,0 +1,9 @@
+.detailContainer {
+    background: radial-gradient(black, #0D1371);
+    color: aliceblue;
+    min-height: 100vh;
+}
+
+#gif {
+    width: 6rem;
+}

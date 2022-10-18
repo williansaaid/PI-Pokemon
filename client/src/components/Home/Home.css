@@ -1,9 +1,25 @@
+body, html {
+    height: 100%;
+}
+
 .home {
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-content: space-around;
     gap: 3rem;
     align-items: center;
+    background: radial-gradient(black, #0D1371);
+}
+
+#renderPokemons {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    align-items: center;
+    gap: 3rem;
+    width: 100%;
+    margin-bottom: 1rem;
 }
 
 .cardContainer {

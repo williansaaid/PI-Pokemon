@@ -3,10 +3,10 @@ body {
   background-color: #050a4d;
   background-repeat: no-repeat;
   background-attachment: scroll;
+  background-size:auto;
   margin: 0;
-  height: 100%;
-  width: 100%;
   box-sizing: border-box;
+  height:100%;
 }
 
 .App {

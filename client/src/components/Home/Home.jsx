@@ -1,7 +1,7 @@
 import React from "react";
 import { useState,useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllPokemons, filterTypePokemon, filterByCreation, filterAlphabetic, filterByAttack, filterByDefense, getPokemonByName } from "../../redux/actions";
+import { getAllPokemons, filterTypePokemon, filterByCreation, filterAlphabetic, filterByAttack, filterByDefense, getPokemonByName, cleanPokemonsHome } from "../../redux/actions";
 import NavBar from "../NavBar/NavBar";
 import PokemonCard from "../PokemonCard/PokemonCard";
 import "./Home.css"
@@ -21,6 +21,10 @@ export default function Home (){
 
     useEffect(()=>{
         dispatch(getAllPokemons());
+
+        return function(){
+            dispatch(cleanPokemonsHome())
+        }
     },[]);
 
     function handleReloadPage(event){
@@ -65,6 +69,7 @@ export default function Home (){
     function handleSearchButton(event){
         event.preventDefault();
         dispatch(getPokemonByName(name));
+        setName("");
     }
 
     return (
@@ -79,23 +84,29 @@ export default function Home (){
                 handleSearchInput={handleSearchInput}
                 handleSearchButton={handleSearchButton}
             />
-            <div className="cardContainer">
-                {currentPokemons&&currentPokemons.map(pokemon => <PokemonCard
-                    key={pokemon.id}
-                    id={pokemon.id}
-                    name={pokemon.name}
-                    image={pokemon.image}
-                    types={pokemon.types}
-                />)}
-            </div>
-            <div>
-                <Pagination
-                    totalPokemons={allPokemons.length}
-                    pokemonsPerPage={pokemonsPerPage}
-                    currentPage={currentPage}
-                    setCurrentPage={setCurrentPage}
-                />
-            </div>
+            {
+                currentPokemons.length > 0 ?
+                <div id="renderPokemons">
+                    <div className="cardContainer">
+                        {currentPokemons&&currentPokemons.map(pokemon => <PokemonCard
+                            key={pokemon.id}
+                            id={pokemon.id}
+                            name={pokemon.name}
+                            image={pokemon.image}
+                            types={pokemon.types}
+                        />)}
+                    </div>
+                    <div>
+                        <Pagination
+                            totalPokemons={allPokemons.length}
+                            pokemonsPerPage={pokemonsPerPage}
+                            currentPage={currentPage}
+                            setCurrentPage={setCurrentPage}
+                        />
+                    </div>
+                </div> :
+                <img src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif" alt="Loading gif" id="gif"/>
+            }
         </div>
     )
 }
