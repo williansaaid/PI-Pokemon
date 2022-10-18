@@ -1,7 +1,7 @@
 import React from "react";
 import { useState,useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllPokemons, filterTypePokemon, filterByCreation, filterAlphabetic, filterByAttack, filterByDefense } from "../../redux/actions";
+import { getAllPokemons, filterTypePokemon, filterByCreation, filterAlphabetic, filterByAttack, filterByDefense, getPokemonByName } from "../../redux/actions";
 import NavBar from "../NavBar/NavBar";
 import PokemonCard from "../PokemonCard/PokemonCard";
 import "./Home.css"
@@ -14,6 +14,7 @@ export default function Home (){
     const [currentPage, setCurrentPage] = useState(1);
     const [pokemonsPerPage, setPokemonsPerPage] = useState(12);
     const [order, setOrder] = useState("");
+    const [ name, setName ] = useState("");
     const lastPokemonIndex = currentPage * pokemonsPerPage;
     const firstPokemonIndex = lastPokemonIndex - pokemonsPerPage;
     const currentPokemons = allPokemons.slice(firstPokemonIndex, lastPokemonIndex);
@@ -24,7 +25,7 @@ export default function Home (){
 
     function handleReloadPage(event){
         event.preventDefault();
-        dispatch(getAllPokemons())
+        dispatch(getAllPokemons());
     }
 
     function handleFilterType(event){
@@ -56,6 +57,16 @@ export default function Home (){
         dispatch(filterByCreation(event.target.value))
     }
 
+    function handleSearchInput(event){
+        event.preventDefault();
+        setName(event.target.value);
+    }
+
+    function handleSearchButton(event){
+        event.preventDefault();
+        dispatch(getPokemonByName(name));
+    }
+
     return (
         <div className="home">
             <NavBar
@@ -65,6 +76,8 @@ export default function Home (){
                 handleFilterAlphabetic={handleFilterAlphabetic}
                 handleFilterAttack={handleFilterAttack}
                 handleFilterDefense={handleFilterDefense}
+                handleSearchInput={handleSearchInput}
+                handleSearchButton={handleSearchButton}
             />
             <div className="cardContainer">
                 {currentPokemons&&currentPokemons.map(pokemon => <PokemonCard

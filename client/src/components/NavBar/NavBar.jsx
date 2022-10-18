@@ -3,7 +3,8 @@ import Filter from "../Filter/Filter"
 import { Link } from "react-router-dom";
 import "./NavBar.css";
 
-const NavBar = ({ handleFilterType, handleReloadPage, handleFilterCreation, handleFilterAlphabetic, handleFilterAttack, handleFilterDefense }) => {
+const NavBar = ({ handleFilterType, handleReloadPage, handleFilterCreation, handleFilterAlphabetic, handleFilterAttack, handleFilterDefense, handleSearchInput, handleSearchButton }) => {
+
     return (
         <div className="navbar">
             <Link to={"/"}>
@@ -11,8 +12,8 @@ const NavBar = ({ handleFilterType, handleReloadPage, handleFilterCreation, hand
             </Link>
             <div id="searchAndFilter">
                 <div className="search">
-                    <input type={"text"} placeholder="Search..." id="inputText"/>
-                    <button id="searchButton"><img src="https://www.flaticon.es/svg/vstatic/svg/3917/3917132.svg?token=exp=1665695327~hmac=7a0cb589fe508f011419ce281ace0b7b" alt="search icon" id="searchIcon"/></button>
+                    <input type={"text"} placeholder="Search..." id="inputText" onChange={handleSearchInput}/>
+                    <button id="searchButton" onClick={handleSearchButton}><img src="https://www.flaticon.es/svg/vstatic/svg/3917/3917132.svg?token=exp=1665695327~hmac=7a0cb589fe508f011419ce281ace0b7b" alt="search icon" id="searchIcon"/></button>
                 </div>
                 <Filter
                     handleFilterType={handleFilterType}

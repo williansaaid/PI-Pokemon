@@ -1,14 +1,29 @@
 .card {
     width: 20rem;
-    height: 20rem;
+    height: auto;
     border: 4px double #FFCB05;
     border-radius: 10px;
     background: url("https://pbs.twimg.com/media/DVMT-6OXcAE2rZY.jpg");
     background-size: cover;
     color: white;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .image {
     width: 7rem;
+}
+
+.typesPk {
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
+.iconsPk {
+    width: 3rem;
 }

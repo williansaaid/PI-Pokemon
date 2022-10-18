@@ -1,8 +1,9 @@
-import { FILTER_ALPHABETIC, FILTER_BY_ATTACK, FILTER_BY_CREATION, FILTER_BY_DEFENSE, FILTER_BY_TYPE, GET_ALL_POKEMONS } from "../actions";
+import { FILTER_ALPHABETIC, FILTER_BY_ATTACK, FILTER_BY_CREATION, FILTER_BY_DEFENSE, FILTER_BY_TYPE, GET_ALL_POKEMONS, GET_POKEMONS_TYPES, GET_POKEMON_BY_NAME, CREATE_POKEMON } from "../actions";
 
 const initialState = {
     pokemons: [],
-    allPokemons: []
+    allPokemons: [],
+    types: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -13,6 +14,23 @@ const rootReducer = (state = initialState, action) => {
                 pokemons: action.payload,
                 allPokemons: action.payload
             };
+
+        case GET_POKEMON_BY_NAME:
+            return {
+                ...state,
+                pokemons: [action.payload]
+            }
+
+        case GET_POKEMONS_TYPES:
+            return {
+                ...state,
+                types: action.payload
+            }
+
+        case CREATE_POKEMON:
+            return {
+                ...state
+            }
 
         case FILTER_BY_TYPE: {
             const allPokemons = state.allPokemons;
@@ -88,7 +106,6 @@ const rootReducer = (state = initialState, action) => {
             const filteredByCreation = action.payload === "db" ?
             allPokemons.filter(pk => pk.createdInDb) :
             allPokemons.filter(pk => !pk.createdInDb);
-            console.log(filteredByCreation);
             return {
                 ...state,
                 pokemons: action.payload === "all" ? state.allPokemons : filteredByCreation

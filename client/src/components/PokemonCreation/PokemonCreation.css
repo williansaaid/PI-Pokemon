@@ -1,0 +1,8 @@
+.pokemonCreate {
+    color: aliceblue;
+    height: 100%;
+}
+
+input::placeholder {
+    color: black;
+}
