@@ -25,7 +25,7 @@ const getGeneralInfoFromAPI = async () => {
 
 const getGeneralInfoFromDB = async () => {
     const pokemonDb = await Pokemon.findAll({
-        attributes: ['id', 'image', 'name', 'attack', 'defense'],
+        attributes: ['id', 'image', 'name', 'attack', 'defense', 'createdInDb'],
         include: {
             model: Types,
             attributes: ['name'],
@@ -40,7 +40,10 @@ const getGeneralInfoFromDB = async () => {
             id: pk.dataValues.id,
             image: pk.dataValues.image,
             name: pk.dataValues.name,
-            types: pk.dataValues.Types.map(e => e.name)
+            types: pk.dataValues.Types.map(e => e.name),
+            attack: pk.dataValues.attack,
+            defense: pk.dataValues.defense,
+            createdInDb: pk.dataValues.createdInDb
         }
     })
     return infoDb;
