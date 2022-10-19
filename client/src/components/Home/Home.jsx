@@ -85,27 +85,29 @@ export default function Home (){
                 handleSearchButton={handleSearchButton}
             />
             {
-                currentPokemons.length > 0 ?
-                <div id="renderPokemons">
-                    <div className="cardContainer">
-                        {currentPokemons&&currentPokemons.map(pokemon => <PokemonCard
-                            key={pokemon.id}
-                            id={pokemon.id}
-                            name={pokemon.name}
-                            image={pokemon.image}
-                            types={pokemon.types}
-                        />)}
-                    </div>
-                    <div>
-                        <Pagination
-                            totalPokemons={allPokemons.length}
-                            pokemonsPerPage={pokemonsPerPage}
-                            currentPage={currentPage}
-                            setCurrentPage={setCurrentPage}
-                        />
-                    </div>
-                </div> :
-                <img src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif" alt="Loading gif" id="gif"/>
+                currentPokemons.length > 0 && typeof currentPokemons === "object" ?
+                    <div id="renderPokemons">
+                        <div className="cardContainer">
+                            {currentPokemons&&currentPokemons.map(pokemon => <PokemonCard
+                                key={pokemon.id}
+                                id={pokemon.id}
+                                name={pokemon.name}
+                                image={pokemon.image}
+                                types={pokemon.types}
+                            />)}
+                        </div>
+                        <div>
+                            <Pagination
+                                totalPokemons={allPokemons.length}
+                                pokemonsPerPage={pokemonsPerPage}
+                                currentPage={currentPage}
+                                setCurrentPage={setCurrentPage}
+                            />
+                        </div>
+                    </div> :
+                        typeof currentPokemons === "object" ?
+                        <img src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif" alt="Loading gif" id="gif"/> :
+                        <img src="https://c.tenor.com/WLoGBfRuOJEAAAAC/will-smith-there-are-none.gif" alt="Loading gif" id="gifNone"/>
             }
         </div>
     )

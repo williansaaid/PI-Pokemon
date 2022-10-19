@@ -126,12 +126,12 @@ const PokemonCreation = () => {
     return (
         <div className="pokemonCreate">
             <Link to={'/home'}>
-                <button>Return</button>
+                <button id="returnHomeFromForm">Return</button>
             </Link>
-            <h1>Pokémon Creation</h1>
-            <button onClick={handleClear}>Clear Form</button>
-            <form onSubmit={handleSubmit}>
-                <div>
+            <div id="formTitleContainer"><h1 id="formTitle">Pokémon Creation</h1></div>
+            <button onClick={handleClear} id="clearForm">Clear Form</button>
+            <form onSubmit={handleSubmit} id="form">
+                <div className="space">
                     <label htmlFor={"nameCrt"}>Name</label>
                     <input
                         type={"text"}
@@ -139,10 +139,12 @@ const PokemonCreation = () => {
                         id={"nameCrt"}
                         value={input.name}
                         onChange={handleChange}
+                        className="inputText"
+                        placeholder="Name"
                     />
-                    <p>{formErrors.name}</p>
+                    <p id="error">{formErrors.name}</p>
                 </div>
-                <div>
+                <div className="space">
                     <label htmlFor={"imageNewPkCrt"}>Image</label>
                     <input
                         type={"url"}
@@ -150,10 +152,12 @@ const PokemonCreation = () => {
                         id={"imageNewPkCrt"}
                         value={input.image}
                         onChange={handleChange}
+                        className="inputText"
+                        placeholder="Image URL"
                     />
-                    <p>{formErrors.image}</p>
+                    <p id="error">{formErrors.image}</p>
                 </div>
-                <div>
+                <div className="space">
                     <label htmlFor={"hpCrt"}>HP</label>
                     <input
                         type={"number"}
@@ -161,10 +165,12 @@ const PokemonCreation = () => {
                         id={"hpCrt"}
                         value={input.hp}
                         onChange={handleChange}
+                        className="inputText"
+                        placeholder="01"
                     />
-                    <p>{formErrors.hp}</p>
+                    <p id="error">{formErrors.hp}</p>
                 </div>
-                <div>
+                <div className="space">
                     <label htmlFor={"attackCrt"}>Attack</label>
                     <input
                         type={"number"}
@@ -172,10 +178,12 @@ const PokemonCreation = () => {
                         id={"attackCrt"}
                         value={input.attack}
                         onChange={handleChange}
+                        className="inputText"
+                        placeholder="01"
                     />
-                    <p>{formErrors.attack}</p>
+                    <p id="error">{formErrors.attack}</p>
                 </div>
-                <div>
+                <div className="space">
                     <label htmlFor={"defenseCrt"}>Defense</label>
                     <input
                         type={"number"}
@@ -183,10 +191,12 @@ const PokemonCreation = () => {
                         id={"defenseCrt"}
                         value={input.defense}
                         onChange={handleChange}
+                        className="inputText"
+                        placeholder="01"
                     />
-                    <p>{formErrors.defense}</p>
+                    <p id="error">{formErrors.defense}</p>
                 </div>
-                <div>
+                <div className="space">
                     <label htmlFor={"speedCrt"}>Speed</label>
                     <input
                         type={"number"}
@@ -194,10 +204,12 @@ const PokemonCreation = () => {
                         id={"speedCrt"}
                         value={input.speed}
                         onChange={handleChange}
+                        className="inputText"
+                        placeholder="01"
                     />
-                    <p>{formErrors.speed}</p>
+                    <p id="error">{formErrors.speed}</p>
                 </div>
-                <div>
+                <div className="space">
                     <label htmlFor={"heightCrt"}>Height</label>
                     <input
                         type={"number"}
@@ -205,10 +217,12 @@ const PokemonCreation = () => {
                         id={"heightCrt"}
                         value={input.height}
                         onChange={handleChange}
+                        className="inputText"
+                        placeholder="00 m"
                     />
-                    <p>{formErrors.height}</p>
+                    <p id="error">{formErrors.height}</p>
                 </div>
-                <div>
+                <div className="space">
                     <label htmlFor={"weightCrt"}>Weight</label>
                     <input
                         type={"number"}
@@ -216,29 +230,32 @@ const PokemonCreation = () => {
                         id={"weightCrt"}
                         value={input.weight}
                         onChange={handleChange}
+                        className="inputText"
+                        placeholder="00 kg"
                     />
-                    <p>{formErrors.weight}</p>
+                    <p id="error">{formErrors.weight}</p>
                 </div>
-                <div>
-                    <select defaultValue={"type"} onChange={handleSelect}>
-                        <option value={"type"} disabled>Type</option>
-                        {types.map((type, key) => {
-                            return <option value={type.name} key={key}>{capitalizeFirst(type.name)}</option>
-                        })}
-                    </select>
-                    <p>{formErrors.types}</p>
-                </div>
-                <div>
-                    <div>
-                        {input.types.map((type, key) => {
-                            return <div key={key}>
-                                <p>{type}</p>
-                                <button onClick={() => handleClearType(type)}>X</button>
-                            </div>
-                        })}
+                <div id="selectContainer">
+                    <p>Types</p>
+                    <div id="optionsContainer">
+                        <select defaultValue={"type"} onChange={handleSelect} id="selectTypes">
+                            <option value={"type"} disabled>Type</option>
+                            {types.map((type, key) => {
+                                return <option value={type.name} key={key}>{capitalizeFirst(type.name)}</option>
+                            })}
+                        </select>
                     </div>
+                    <p id="error">{formErrors.types}</p>
                 </div>
-                <button type="submit">Create Pokémon</button>
+                <div id="typeContainer">
+                    {input.types.map((type, key) => {
+                        return <div key={key} className="typeArea">
+                            <p className="typeText">{capitalizeFirst(type)}</p>
+                            <button onClick={() => handleClearType(type)} className="buttonX">X</button>
+                        </div>
+                    })}
+                </div>
+                <button type="submit" id="createPokemon">Create Pokémon</button>
             </form>
         </div>
     )

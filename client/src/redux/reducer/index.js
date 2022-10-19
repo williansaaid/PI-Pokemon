@@ -109,9 +109,13 @@ const rootReducer = (state = initialState, action) => {
 
         case FILTER_BY_CREATION: {
             const allPokemons = state.allPokemons;
-            const filteredByCreation = action.payload === "db" ?
+            let filteredByCreation = action.payload === "db" ?
             allPokemons.filter(pk => pk.createdInDb) :
             allPokemons.filter(pk => !pk.createdInDb);
+            if (filteredByCreation.length === 0){
+                filteredByCreation = "No Pokemon in DB"
+                alert("There are no Pokémons created yet!")
+            }
             return {
                 ...state,
                 pokemons: action.payload === "all" ? state.allPokemons : filteredByCreation

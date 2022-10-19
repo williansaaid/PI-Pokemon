@@ -1,8 +1,214 @@
 .pokemonCreate {
-    color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    width: 100%;
     height: 100%;
+    padding: 1rem 0;
+    box-sizing: border-box;
+    background: radial-gradient(black, #0D1371);
+    color: #f0f8ff;
+    min-height: 100vh;
+    font-family: 'Montserrat', sans-serif;
 }
 
 input::placeholder {
     color: black;
+}
+
+#formTitleContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(240, 248, 255);
+    background-image: linear-gradient(45deg, #86E3CE, #FFDD94);
+    background-size: auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+}
+
+#formTitle {
+    font-size: 4rem;
+    width: 100%;
+    margin: -0.5rem 0;
+}
+
+#form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+    width: 90%;
+}
+
+.inputText {
+    background: transparent;
+    border: 1px solid #f0f8ff;
+    border-radius: 5px;
+    margin-left: 1rem;
+    font-size: 0.9rem;
+    height: 90%;
+    transition: 0.5s ease-in-out;
+}
+
+.inputText::placeholder {
+    color: #f0f8ffa5;
+    padding-left: 0.6rem;
+}
+
+.inputText:hover {
+    background-color: #424242;
+    color: #0D1371;
+    transition: 0.1s ease-in-out;
+}
+
+.inputText:focus {
+    background-color: #f0f8ff;
+    color: #0D1371;
+    transition: 0.5s ease-in-out;
+}
+
+.typeArea {
+    display: flex;
+    border: 1px solid #f0f8ff;
+    padding: 0.2rem 0.2rem 0.2rem 0.5rem;
+    border-radius: 25px;
+}
+
+.typeText {
+    margin: 0;
+    color: #f0f8ff
+}
+
+.buttonX {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    background-color: #f0f8ff;
+    width: 1.3rem;
+    border-radius: 25px;
+    color: #0D1371;
+    margin-left: 0.5rem;
+}
+
+.space {
+    height: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+#error {
+    color: #d40000;
+    font-size: 0.8rem;
+}
+
+#typeContainer {
+    display: flex;
+    justify-content: space-around;
+    max-width: 60%;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+#selectContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#optionsContainer {
+    background-color: #86E3CE;
+    background-image: linear-gradient(45deg, #86E3CE, #f0f8ff);
+    height: auto;
+    width: fit-content;
+    border-radius: 10px;
+}
+
+#selectTypes {
+    width: fit-content;
+    font-size: 1rem;
+    border-radius: 10px;
+    border: 2px solid black;
+    cursor: pointer;
+    appearance: none;
+    cursor: pointer;
+    background-color: transparent;
+    padding: 0.1rem 1.7rem 0.1rem 0.7rem;
+    background-image: none;
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iNzUycHQiIGhlaWdodD0iNzUycHQiIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDc1MiA3NTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiA8Zz4KICA8cGF0aCBkPSJtNTMxIDI5NWMtMy44NDc3LTMuODI0Mi0xMC4wNjItMy44MjQyLTEzLjkxIDBsLTE0MS4wOSAxNDEuMDktMTQwLjk5LTE0MS4wOWMtMy45MTQxLTMuMzUxNi05Ljc1LTMuMTI4OS0xMy4zOTUgMC41MTU2Mi0zLjY0NDUgMy42NDQ1LTMuODY3MiA5LjQ4MDUtMC41MTU2MyAxMy4zOTVsMTQ3Ljk5IDE0Ny45OXYwLjAwMzkwNmMzLjg0NzcgMy44MjQyIDEwLjA2NiAzLjgyNDIgMTMuOTE0IDBsMTQ3Ljk5LTE0Ny45OXYtMC4wMDM5MDZjMy44MjQyLTMuODQ3NyAzLjgyNDItMTAuMDYyIDAtMTMuOTF6Ii8+CiAgPHBhdGggZD0ibTM2OSAzOTcuOGMzLjg0NzcgMy44MjgxIDEwLjA2MiAzLjgyODEgMTMuOTEgMGw4OC43OTctODguNzk3YzMuMzUxNi0zLjkxNDEgMy4xMjg5LTkuNzUtMC41MTU2Mi0xMy4zOTEtMy42NDQ1LTMuNjQ0NS05LjQ4MDUtMy44NzExLTEzLjM5NS0wLjUxOTUzbC04MS43OTMgODEuNzkzLTgxLjc5My04MS43OTNoMC4wMDM5MDdjLTMuOTE0MS0zLjM1MTYtOS43NS0zLjEyNS0xMy4zOTUgMC41MTk1My0zLjY0NDUgMy42NDA2LTMuODcxMSA5LjQ3NjYtMC41MTk1MyAxMy4zOTF6Ii8+CiA8L2c+Cjwvc3ZnPgo=);
+    background-repeat:no-repeat;
+    background-size: 2.5rem;
+    background-position: 108% 50%;
+    transition: ease-in 0.1s;
+}
+
+#selectTypes:hover {
+    color: black;
+    background-color: #a7e0d3;
+    transition: ease-in 0.1s;
+}
+
+#selectTypes::-ms-expand {
+    display: none; /* remove default arrow on ie10 and ie11 */
+}
+
+#clearForm {
+    font-family: 'Montserrat', sans-serif;
+    width: auto;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    color: #f0f8ff;
+    background: radial-gradient(black, #0D1371);
+    border: 4px solid #f0f8ff;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+}
+
+#returnHomeFromForm {
+    font-family: 'Montserrat', sans-serif;
+    width: auto;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    color: #f0f8ff;
+    background: radial-gradient(black, #0D1371);
+    border: 4px solid #f0f8ff;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+}
+
+#createPokemon {
+    font-family: 'Montserrat', sans-serif;
+    width: auto;
+    padding: 0.6rem 1.2rem;
+    font-size: 1.5rem;
+    color: #f0f8ff;
+    background-color: transparent;
+    border: 4px solid #f0f8ff;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+    transition: 0.5s linear;
+}
+
+#createPokemon:hover {
+    color: #0D1371;
+    background-color: #f0f8ff;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.5s linear;
 }

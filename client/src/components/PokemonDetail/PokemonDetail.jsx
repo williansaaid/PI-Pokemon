@@ -21,13 +21,13 @@ const PokemonDetail = (props) => {
         <div className="detailContainer">
             {
                 Object.keys(pokemon).length > 1 ?
-                <div>
+                <div className="detailContainer">
                     <Link to={'/home'}>
-                        <button>Return</button>
+                        <button id="returnHome">Return</button>
                     </Link>
-                    <h1>{capitalizeFirst(pokemon.name)}</h1>
-                    <p>ID: {pokemon.id}</p>
-                    <img src={pokemon.image}/>
+                    <div id="namePkDetailContainer"><h1 id="namePkDetail">{capitalizeFirst(pokemon.name)}</h1></div>
+                    <h4 id="idPkDetail">ID: {pokemon.id}</h4>
+                    <img src={pokemon.image} alt={pokemon.name} id="imgPkDetail"/>
                     <div className="typesPk">
                         {pokemon.types.map((type, key) => {
                             return <div className="typesDetail" key={key}>
@@ -36,22 +36,25 @@ const PokemonDetail = (props) => {
                             </div>
                     })}
                     </div>
-                    <div>
-                        <h4>Stats</h4>
-                        <p>HP: {pokemon.hp}</p>
-                        <p>Attack Points: {pokemon.attack}</p>
-                        <p>Defense Points: {pokemon.defense}</p>
-                        <p>Speed: {pokemon.speed}</p>
-                    </div>
-                    <div>
-                        <h4>Abilities</h4>
-                        {pokemon.abilities.map((ability, key) => {
-                            return <p key={key}>{capitalizeFirst(ability)}</p>
-                        })}
-                    </div>
-                    <div>
-                        <p>Height: {pokemon.height} m</p>
-                        <p>Weight: {pokemon.weight} kg</p>
+                    <div className="dataText">
+                        <div>
+                            <h2>Stats</h2>
+                            <p>HP: {pokemon.hp}</p>
+                            <p>Attack Points: {pokemon.attack}</p>
+                            <p>Defense Points: {pokemon.defense}</p>
+                            <p>Speed: {pokemon.speed}</p>
+                        </div>
+                        <div>
+                            <h2>Abilities</h2>
+                            {pokemon.abilities.map((ability, key) => {
+                                return <p key={key}>{capitalizeFirst(ability)}</p>
+                            })}
+                        </div>
+                        <div>
+                            <h2>Additional Info</h2>
+                            <p>Height: {pokemon.height} m</p>
+                            <p>Weight: {pokemon.weight} kg</p>
+                        </div>
                     </div>
                 </div> :
                 <img src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif" alt="Loading gif" id="gif"/>
