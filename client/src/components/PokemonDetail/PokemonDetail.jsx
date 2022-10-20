@@ -46,9 +46,13 @@ const PokemonDetail = (props) => {
                         </div>
                         <div>
                             <h2>Abilities</h2>
-                            {pokemon.abilities.map((ability, key) => {
-                                return <p key={key}>{capitalizeFirst(ability)}</p>
-                            })}
+                            {
+                                typeof pokemon.id === "number" ?
+                                    pokemon.abilities.map((ability, key) => {
+                                        return <p key={key}>{capitalizeFirst(ability)}</p>
+                                    }) :
+                                    <p>Uknown</p>
+                            }
                         </div>
                         <div>
                             <h2>Additional Info</h2>

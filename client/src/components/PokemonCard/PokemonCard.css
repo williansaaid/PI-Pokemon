@@ -5,25 +5,41 @@
     border-radius: 10px;
     background: url("https://pbs.twimg.com/media/DVMT-6OXcAE2rZY.jpg");
     background-size: cover;
-    color: white;
+    color: #f0f8ff;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .image {
     width: 7rem;
 }
 
-.typesPk {
+.containerTypesGeneral {
     width: 60%;
     display: flex;
-    align-items: center;
     justify-content: space-around;
-    gap: 1rem;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
 }
 
 .iconsPk {
     width: 3rem;
+}
+
+.name {
+    font-weight: bold;
+    font-size:1.4rem;
+}
+
+.typePkGeneral {
+    font-size: 1.2rem;
+    margin: 0 0 1rem;
+}
+
+.iconTypes {
+    margin: 0;
 }

@@ -43,9 +43,12 @@
     display: flex;
     justify-content: space-around;
     width: 20rem;
+    margin: 3rem 0 0;
 }
 
 .iconsPkDetail {
+    max-width: 5rem;
+    min-width: 3rem;
     width: 50%;
 }
 
@@ -57,7 +60,7 @@
 }
 
 .dataText div {
-    width: 10rem;
+    width: 10.2rem;
     padding: 0 2rem;
 }
 

@@ -11,11 +11,11 @@ const PokemonCard = (props) => {
                     <img src={props.image} alt={`Imagen de ${props.name}`} className="image"/>
                 </Link>
                 <p className="name">{capitalizeFirst(props.name)}</p>
-                <div className="typesPk">
+                <div className="containerTypesGeneral">
                     {props.types.map((type, key) => {
                         return <div className="iconTypes" key={key}>
                             <img src={icons[type]} alt={`${type} icon`} className="iconsPk"/>
-                            <p className="type" key={type}>{capitalizeFirst(type)}</p>
+                            <p className="typePkGeneral" key={type}>{capitalizeFirst(type)}</p>
                         </div>
                     })}
                 </div>
