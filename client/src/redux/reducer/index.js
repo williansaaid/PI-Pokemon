@@ -1,10 +1,11 @@
-import { FILTER_ALPHABETIC, FILTER_BY_ATTACK, FILTER_BY_CREATION, FILTER_BY_DEFENSE, FILTER_BY_TYPE, GET_ALL_POKEMONS, GET_POKEMONS_TYPES, GET_POKEMON_BY_NAME, CREATE_POKEMON, GET_POKEMON_DETAIL, CLEAN_DETAIL, CLEAN_POKEMONS_HOME } from "../actions";
+import { FILTER_ALPHABETIC, FILTER_BY_ATTACK, FILTER_BY_CREATION, FILTER_BY_DEFENSE, FILTER_BY_TYPE, GET_ALL_POKEMONS, GET_POKEMONS_TYPES, GET_POKEMON_BY_NAME, CREATE_POKEMON, GET_POKEMON_DETAIL, CLEAN_DETAIL, CLEAN_POKEMONS_HOME, GET_POKEMON_NAME } from "../actions";
 
 const initialState = {
     pokemons: [],
     allPokemons: [],
     types: [],
-    detail: []
+    detail: [],
+    pokemonName: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -20,6 +21,14 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 pokemons: [action.payload]
+            }
+
+        case GET_POKEMON_NAME:
+            const name = state.allPokemons.filter(pk => pk.name === action.payload);
+            console.log(name);
+            return {
+                ...state,
+                pokemonName: name
             }
 
         case GET_POKEMON_DETAIL:

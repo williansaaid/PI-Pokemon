@@ -12,6 +12,7 @@ export const CREATE_POKEMON = "CREATE_POKEMON";
 export const GET_POKEMON_DETAIL = "GET_POKEMON_DETAIL";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
 export const CLEAN_POKEMONS_HOME = "CLEAN_POKEMONS_HOME";
+export const GET_POKEMON_NAME = "GET_POKEMON_NAME";
 
 export const getAllPokemons = () => {
     return async function (dispatch){
@@ -39,6 +40,13 @@ export const getPokemonByName = (payload) => {
             console.log(error);
             alert(`We could not find "${payload}" in our Pokédex :(`)
         }
+    }
+}
+
+export const getPokemonName = (payload) => {
+    return {
+        type: GET_POKEMON_NAME,
+        payload
     }
 }
 

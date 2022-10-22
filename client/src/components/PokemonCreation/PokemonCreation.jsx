@@ -3,7 +3,7 @@ import "./PokemonCreation.css"
 import { Link, useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPokemonsTypes, createPokemon } from "../../redux/actions";
+import { getPokemonsTypes, createPokemon, get } from "../../redux/actions";
 import { icons, capitalizeFirst } from "../../helpers/utils";
 
 
@@ -11,6 +11,7 @@ const PokemonCreation = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const types = useSelector((state) => state.types);
+    const pokemonName = useSelector((state) => state.pokemonName);
     const [input, setInput] = useState({
         name: "",
         image: "",
@@ -23,10 +24,12 @@ const PokemonCreation = () => {
         types: []
     });
     const [formErrors, setFormErrors] = useState({});
+    let [clickedSubmit, setClickedSubmit] = useState(false);
 
     useEffect(() => {
-        dispatch(getPokemonsTypes())
+        dispatch(getPokemonsTypes());
     },[]);
+    console.log(pokemonName);
 
     function validateForm(input){
         const errors = {};
@@ -36,6 +39,7 @@ const PokemonCreation = () => {
         else if(!regex.test(input.name) || input.name.length > 20){
             errors.name = "The name is invalid, try again"
         }
+        // else if()
 
         if(!input.image) errors.image = "An image url is missing";
 
@@ -85,7 +89,7 @@ const PokemonCreation = () => {
                 setInput({
                     ...input,
                     types: [ ...input.types, event.target.value]
-                })
+                });
             };
         };
     };
@@ -103,26 +107,37 @@ const PokemonCreation = () => {
             types: []
         })
         setFormErrors({});
+        setClickedSubmit(false);
     }
 
     function handleClearType(element){
         setInput({
             ...input,
             types: input.types.filter(type => type !== element)
-        })
+        });
     }
 
     function handleSubmit(event){
         event.preventDefault();
+        setClickedSubmit(true);
         setFormErrors(validateForm(input));
         if(validateForm(input) === true){
-            console.log("Holaa");
             dispatch(createPokemon(input));
+            setClickedSubmit(false);
             alert("You have created a new Pokémon!");
             handleClear();
             history.push('/home');
         }
     };
+
+    function handleOnChange(event){
+        event.preventDefault();
+        if(clickedSubmit) setFormErrors(validateForm(input))
+    };
+
+    useEffect(() => {
+        if(clickedSubmit) setFormErrors(validateForm(input));
+    }, [input])
 
     return (
         <div className="pokemonCreate">
@@ -131,7 +146,7 @@ const PokemonCreation = () => {
             </Link>
             <div id="formTitleContainer"><h1 id="formTitle">Pokémon Creation</h1></div>
             <button onClick={handleClear} id="clearForm">Clear Form</button>
-            <form onSubmit={handleSubmit} id="form">
+            <form onSubmit={handleSubmit} onChange={handleOnChange} id="form">
                 <div className="space">
                     <label htmlFor={"nameCrt"}>Name</label>
                     <div className="content">
@@ -272,7 +287,10 @@ const PokemonCreation = () => {
                         </div>
                     })}
                 </div>
-                <button type="submit" id="createPokemon">Create Pokémon</button>
+                <button
+                    type="submit"
+                    id={Object.keys(formErrors).length < 1 ? "createPokemon" : "disabledCreatePokemon"}
+                    >Create Pokémon</button>
             </form>
         </div>
     )

@@ -4,11 +4,6 @@ import React from "react";
 import "./Filter.css";
 
 const Filter = ({handleFilterType, handleFilterCreation, handleFilterAlphabetic, handleFilterAttack, handleFilterDefense}) => {
-    // const dispatch = useDispatch();
-
-    // function handleFilterType(event){
-    //     dispatch(filterTypePokemon(event.target.value))
-    // }
 
     return (
         <div className="containerFilter">
