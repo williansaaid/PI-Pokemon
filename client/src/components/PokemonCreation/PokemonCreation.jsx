@@ -29,7 +29,6 @@ const PokemonCreation = () => {
     useEffect(() => {
         dispatch(getPokemonsTypes());
     },[]);
-    console.log(pokemonName);
 
     function validateForm(input){
         const errors = {};
@@ -39,7 +38,6 @@ const PokemonCreation = () => {
         else if(!regex.test(input.name) || input.name.length > 20){
             errors.name = "The name is invalid, try again"
         }
-        // else if()
 
         if(!input.image) errors.image = "An image url is missing";
 
@@ -283,7 +281,7 @@ const PokemonCreation = () => {
                     {input.types.map((type, key) => {
                         return <div key={key} className="typeArea">
                             <p className="typeText">{capitalizeFirst(type)}</p>
-                            <button onClick={() => handleClearType(type)} className="buttonX">X</button>
+                            <button onClick={() => handleClearType(type)} className="buttonX" type="button">X</button>
                         </div>
                     })}
                 </div>
