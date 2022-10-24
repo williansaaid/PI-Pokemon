@@ -24,8 +24,7 @@ const rootReducer = (state = initialState, action) => {
             }
 
         case GET_POKEMON_NAME:
-            const name = state.allPokemons.filter(pk => pk.name === action.payload);
-            console.log(name);
+            const name = state.allPokemons.map(pk => (pk.name).toLowerCase());
             return {
                 ...state,
                 pokemonName: name
@@ -101,13 +100,13 @@ const rootReducer = (state = initialState, action) => {
         case FILTER_ALPHABETIC: {
             const filteredAlphabetic = action.payload === "a-z" ?
             state.pokemons.sort(function(a, b){
-                if(a.name > b.name) return 1;
-                if(b.name > a.name) return -1;
+                if((a.name).toLowerCase() > (b.name).toLowerCase()) return 1;
+                if((b.name).toLowerCase() > (a.name).toLowerCase()) return -1;
                 return 0;
             }) :
             state.pokemons.sort(function(a, b){
-                if(a.name > b.name) return -1;
-                if(b.name > a.name) return 1;
+                if((a.name).toLowerCase() > (b.name).toLowerCase()) return -1;
+                if((b.name).toLowerCase() > (a.name).toLowerCase()) return 1;
                 return 0;
             });
             return {

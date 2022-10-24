@@ -83,3 +83,11 @@
 #searchIcon {
     width: 20px;
 }
+
+#navMenuButton {
+    display: none;
+}
+
+@media (max-width: 1200px){
+
+}

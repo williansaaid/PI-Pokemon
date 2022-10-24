@@ -8,6 +8,7 @@ import { icons, capitalizeFirst } from "../../helpers/utils";
 
 const PokemonDetail = (props) => {
     const dispatch = useDispatch();
+
     useEffect(() => {
         dispatch(getPokemonDetail(props.match.params.id))
 
@@ -20,7 +21,7 @@ const PokemonDetail = (props) => {
     return (
         <div className="detailContainer">
             {
-                Object.keys(pokemon).length > 1 ?
+                pokemon !== undefined && Object.keys(pokemon).length > 1 ?
                 <div className="detailContainer">
                     <Link to={'/home'}>
                         <button id="returnHome">Return</button>
@@ -56,8 +57,8 @@ const PokemonDetail = (props) => {
                         </div>
                         <div>
                             <h2>Additional Info</h2>
-                            <p>Height: {pokemon.height} m</p>
-                            <p>Weight: {pokemon.weight} kg</p>
+                            <p>Height: {pokemon.height * 10} m</p>
+                            <p>Weight: {pokemon.weight * 10} kg</p>
                         </div>
                     </div>
                 </div> :

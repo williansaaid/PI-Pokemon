@@ -3,7 +3,7 @@ import "./PokemonCreation.css"
 import { Link, useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPokemonsTypes, createPokemon, get } from "../../redux/actions";
+import { getPokemonsTypes, createPokemon, getPokemonName } from "../../redux/actions";
 import { icons, capitalizeFirst } from "../../helpers/utils";
 
 
@@ -28,6 +28,7 @@ const PokemonCreation = () => {
 
     useEffect(() => {
         dispatch(getPokemonsTypes());
+        dispatch(getPokemonName());
     },[]);
 
     function validateForm(input){
@@ -37,7 +38,7 @@ const PokemonCreation = () => {
         if(!input.name) errors.name = "Give your Pokémon a name"
         else if(!regex.test(input.name) || input.name.length > 20){
             errors.name = "The name is invalid, try again"
-        }
+        } else if(pokemonName.find(pk => pk === input.name.toLowerCase())) errors.name = "That name is already taken"
 
         if(!input.image) errors.image = "An image url is missing";
 

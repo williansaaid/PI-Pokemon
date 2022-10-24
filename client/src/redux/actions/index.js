@@ -43,10 +43,9 @@ export const getPokemonByName = (payload) => {
     }
 }
 
-export const getPokemonName = (payload) => {
+export const getPokemonName = () => {
     return {
-        type: GET_POKEMON_NAME,
-        payload
+        type: GET_POKEMON_NAME
     }
 }
 

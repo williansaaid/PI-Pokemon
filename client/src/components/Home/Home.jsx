@@ -14,14 +14,13 @@ export default function Home (){
     const [currentPage, setCurrentPage] = useState(1);
     const [pokemonsPerPage, setPokemonsPerPage] = useState(12);
     const [order, setOrder] = useState("");
-    const [ name, setName ] = useState("");
+    const [name, setName] = useState("");
     const lastPokemonIndex = currentPage * pokemonsPerPage;
     const firstPokemonIndex = lastPokemonIndex - pokemonsPerPage;
     const currentPokemons = allPokemons.slice(firstPokemonIndex, lastPokemonIndex);
 
     useEffect(()=>{
         dispatch(getAllPokemons());
-
         return function(){
             dispatch(cleanPokemonsHome())
         }
@@ -107,7 +106,7 @@ export default function Home (){
                     </div> :
                         typeof currentPokemons === "object" ?
                         <img src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif" alt="Loading gif" id="gif"/> :
-                        <img src="https://c.tenor.com/WLoGBfRuOJEAAAAC/will-smith-there-are-none.gif" alt="Loading gif" id="gifNone"/>
+                        <img src="https://media.tenor.com/wWiwC0p518wAAAAC/nothing-no.gif" alt="None gif" id="gifNone"/>
             }
         </div>
     )
