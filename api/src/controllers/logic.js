@@ -109,15 +109,15 @@ const getDetailedInfoFromDB = async (param) => {
 }
 
 const getGeneralInfoPokemons = async () => {
-    const infoFromApi = await getGeneralInfoFromAPI();
     const infoFromDB = await getGeneralInfoFromDB();
-    const allPokemons = infoFromApi.concat(infoFromDB);
+    const infoFromApi = await getGeneralInfoFromAPI();
+    const allPokemons = infoFromDB.concat(infoFromApi);
     return allPokemons;
 }
 
 const getDetailedInfoPokemon = async (param) => {
-    const infoFromApi = await getDetailedInfoFromAPI(param);
     const infoFromDB = await getDetailedInfoFromDB(param);
+    const infoFromApi = await getDetailedInfoFromAPI(param);
     let pokemonDetailed;
     infoFromApi ? pokemonDetailed = infoFromApi : pokemonDetailed = infoFromDB;
     return pokemonDetailed;
