@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import "./Filter.css";
 
-const Filter = ({handleFilterType, handleFilterCreation, handleFilterAlphabetic, handleFilterAttack, handleFilterDefense, handleCheckBox }) => {
+const Filter = ({handleFilterType, handleFilterCreation, handleFilterAlphabetic, handleFilterAttack, handleFilterDefense }) => {
 
     const [filter, setFilter] = useState(false);
     function handleCheckBox(event){

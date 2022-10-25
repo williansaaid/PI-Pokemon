@@ -60,7 +60,9 @@ const rootReducer = (state = initialState, action) => {
                     ...state,
                     pokemons: filteredByType
                 }
-            } else alert(`There are no ${action.payload} Pokémons yet :(`)
+            } else {
+                return alert(`There are no ${action.payload} Pokémons yet :(`)
+            }
         }
 
         case FILTER_BY_ATTACK: {

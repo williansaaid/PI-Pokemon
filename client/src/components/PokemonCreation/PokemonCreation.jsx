@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPokemonsTypes, createPokemon, getPokemonName } from "../../redux/actions";
-import { icons, capitalizeFirst } from "../../helpers/utils";
+import { capitalizeFirst } from "../../helpers/utils";
 
 
 const PokemonCreation = () => {

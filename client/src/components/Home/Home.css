@@ -29,10 +29,17 @@ body, html {
     align-content:space-between;
     gap: 1rem;
     justify-content: center;
+    margin: 0 2rem;
 }
 
 #gifNone {
     height: 100%;
     margin: 1rem;
     border-radius: 15px;
+}
+
+@media (max-width: 300px){
+    .cardContainer {
+        margin: 0;
+    }
 }

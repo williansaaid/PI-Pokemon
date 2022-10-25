@@ -19,14 +19,16 @@ const PokemonDetail = (props) => {
     const pokemon = useSelector((state) => state.detail)
 
     return (
-        <div className="detailContainer">
+        <div className="detailWraper">
             {
                 pokemon !== undefined && Object.keys(pokemon).length > 1 ?
                 <div className="detailContainer">
                     <Link to={'/home'}>
                         <button id="returnHome">Return</button>
                     </Link>
-                    <div id="namePkDetailContainer"><h1 id="namePkDetail">{capitalizeFirst(pokemon.name)}</h1></div>
+                    <div id="namePkDetailContainer">
+                        <h1 id="namePkDetail">{capitalizeFirst(pokemon.name)}</h1>
+                    </div>
                     <h4 id="idPkDetail">ID: {pokemon.id}</h4>
                     <img src={pokemon.image} alt={pokemon.name} id="imgPkDetail"/>
                     <div className="typesPk">
@@ -57,8 +59,8 @@ const PokemonDetail = (props) => {
                         </div>
                         <div>
                             <h2>Additional Info</h2>
-                            <p>Height: {pokemon.height * 10} m</p>
-                            <p>Weight: {pokemon.weight * 10} kg</p>
+                            <p>Height: {pokemon.height} m</p>
+                            <p>Weight: {pokemon.weight} kg</p>
                         </div>
                     </div>
                 </div> :

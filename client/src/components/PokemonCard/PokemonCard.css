@@ -50,3 +50,26 @@
 .iconTypes {
     margin: 0;
 }
+
+@media (max-width: 500px){
+    .card {
+        width: 17rem
+    }
+    .iconsPk {
+        width: 2rem;
+    }
+    .name {
+        font-weight: bold;
+        font-size:1.4rem;
+    }
+    .typePkGeneral {
+        font-size: 1rem;
+        margin: 0 0 1rem;
+    }
+}
+
+@media (max-width: 350px){
+    .card {
+        width: 15rem
+    }
+}

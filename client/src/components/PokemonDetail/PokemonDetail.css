@@ -1,3 +1,10 @@
+.detailWraper {
+    width: 100%;
+    height: 100%;
+    min-width: 99vw;
+    margin: 0;
+}
+
 .detailContainer {
     background: radial-gradient(black, #0D1371);
     color: aliceblue;
@@ -14,7 +21,8 @@
 }
 
 #namePkDetailContainer {
-    height: 6rem;
+    height: auto;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -31,18 +39,20 @@
 #namePkDetail {
     font-size: 5rem;
     width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 #imgPkDetail {
     width: 35%;
-    min-width: 20rem;
-    max-width: 30rem;
+    min-width: 17rem;
+    max-width: 27rem;
 }
 
 .typesPk {
     display: flex;
     justify-content: space-around;
-    width: 20rem;
+    width: 17rem;
     margin: 3rem 0 0;
 }
 
@@ -81,4 +91,24 @@
 
 #gif {
     width: 6rem;
+}
+
+@media (max-width: 1000px){
+    #namePkDetail {
+        height: 100%;
+        font-size: 5rem;
+    }
+    .dataText {
+        gap: 0;
+    }
+}
+
+@media (max-width: 500px){
+    #namePkDetail {
+        height: 100%;
+        font-size: 2rem;
+    }
+    .dataText {
+        gap: 0;
+    }
 }

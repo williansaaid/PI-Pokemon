@@ -61,3 +61,50 @@
     -moz-box-shadow: 1px -1px 29px 6px rgba(255,203,5,0.59);
     transition: linear 0.4s;
 }
+
+@media (max-width: 1000px){
+    .containerLanding {
+        min-height: 100vh;
+        min-width: 300px;
+        display: flex;
+        flex-direction: column;
+        align-content: space-around;
+        gap: 3rem;
+        align-items: center;
+        background: radial-gradient(black, #0D1371);
+    }
+    #cont {
+        display: none;
+    }
+    #logoLanding {
+        width: 80%;
+        min-width: 300px;
+    }
+    #header {
+        color: #FFCB05;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 2rem;
+        width: 80%;
+    }
+    #intro {
+        width: 60%;
+        color: #FFCB05;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.2rem;
+    }
+    #logoLanding {
+        width: 40%;
+    }
+    #buttonStart {
+        font-family: 'Montserrat', sans-serif;
+        width: 200px;
+        height: 70px;
+        font-size: 1.2rem;
+        border: 4px solid #FFCB05;
+        color: #FFCB05;
+        background-color: transparent;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: ease-out 0.5s;
+    }
+}
