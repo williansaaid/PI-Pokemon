@@ -67,7 +67,7 @@ export default function Home (){
 
     function handleSearchButton(event){
         event.preventDefault();
-        dispatch(getPokemonByName(name));
+        name.length > 0 ? dispatch(getPokemonByName(name)) : alert("You can not find a Pokémon without name ;)");
         setName("");
     }
 

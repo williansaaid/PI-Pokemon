@@ -53,4 +53,11 @@
     background-color: transparent;
     border-radius: 25px;
     cursor: pointer;
+    transition: ease-out 0.5s;
+}
+#buttonStart:hover {
+    box-shadow: 1px -1px 29px 6px rgba(255,203,5,0.59);
+    -webkit-box-shadow: 1px -1px 29px 6px rgba(255,203,5,0.59);
+    -moz-box-shadow: 1px -1px 29px 6px rgba(255,203,5,0.59);
+    transition: linear 0.4s;
 }

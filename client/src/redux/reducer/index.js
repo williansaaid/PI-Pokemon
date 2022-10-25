@@ -55,10 +55,12 @@ const rootReducer = (state = initialState, action) => {
             allPokemons.filter(pk =>{
                 return pk.types.find(type => type === action.payload) === action.payload
             });
-            return {
-                ...state,
-                pokemons: filteredByType
-            };
+            if(filteredByType.length > 0){
+                return {
+                    ...state,
+                    pokemons: filteredByType
+                }
+            } else alert(`There are no ${action.payload} Pokémons yet :(`)
         }
 
         case FILTER_BY_ATTACK: {

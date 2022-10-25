@@ -46,6 +46,7 @@
 #refreshAndCreate{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 2rem;
 }
 
@@ -57,19 +58,33 @@
 }
 
 #refreshIcon {
-    width: 20px;
+    width: 1.5rem;
 }
 
 #refresh {
     cursor: pointer;
     border: none;
     background-color: transparent;
+    transform: rotate(-90deg);
+    transition: ease-in 0.4s;
+}
+#refresh:hover {
+    transform: rotate(90deg);
+    transition: ease-in 0.4s;
 }
 
 #create {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 0.5rem;
+    padding: 0.1rem 0.7rem;
+    border-radius: 10px;
+    transition: ease-out 0.4s;
+}
+#create:hover {
+    background-color: #ffde59;
+    transition: linear 0.2s;
 }
 
 #logo {
@@ -77,7 +92,7 @@
 }
 
 #createIcon {
-    width: 15px;
+    height: 1.5rem;
 }
 
 #searchIcon {
