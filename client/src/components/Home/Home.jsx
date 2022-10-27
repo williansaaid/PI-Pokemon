@@ -13,7 +13,6 @@ export default function Home (){
     const allPokemons = useSelector((state) => state.pokemons);
     const [currentPage, setCurrentPage] = useState(1);
     const [pokemonsPerPage, setPokemonsPerPage] = useState(12);
-    const [order, setOrder] = useState("");
     const [name, setName] = useState("");
     const lastPokemonIndex = currentPage * pokemonsPerPage;
     const firstPokemonIndex = lastPokemonIndex - pokemonsPerPage;
@@ -39,21 +38,18 @@ export default function Home (){
         event.preventDefault();
         dispatch(filterAlphabetic(event.target.value))
         setCurrentPage(1);
-        setOrder(`Order ${event.target.value}`);
     }
 
     function handleFilterAttack(event){
         event.preventDefault();
         dispatch(filterByAttack(event.target.value))
         setCurrentPage(1);
-        setOrder(`Order ${event.target.value}`);
     }
 
     function handleFilterDefense(event){
         event.preventDefault();
         dispatch(filterByDefense(event.target.value))
         setCurrentPage(1);
-        setOrder(`Order ${event.target.value}`);
     }
 
     function handleFilterCreation(event){
@@ -68,6 +64,7 @@ export default function Home (){
     function handleSearchButton(event){
         event.preventDefault();
         name.length > 0 ? dispatch(getPokemonByName(name)) : alert("You can not find a Pokémon without name ;)");
+        setCurrentPage(1);
         setName("");
     }
 
