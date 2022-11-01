@@ -86,6 +86,7 @@ export const createPokemon = (payload) => {
             });
             return response;
         } catch (error) {
+            alert("No se pudo crear el pokemon")
             console.log(error);
         }
     }

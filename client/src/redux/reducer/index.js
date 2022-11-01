@@ -44,8 +44,7 @@ const rootReducer = (state = initialState, action) => {
 
         case CREATE_POKEMON:
             return {
-                ...state,
-                detail: action.payload
+                ...state
             }
 
         case FILTER_BY_TYPE: {
@@ -55,13 +54,10 @@ const rootReducer = (state = initialState, action) => {
             allPokemons.filter(pk =>{
                 return pk.types.find(type => type === action.payload) === action.payload
             });
-            if(filteredByType.length > 0){
-                return {
-                    ...state,
-                    pokemons: filteredByType
-                }
-            } else {
-                return alert(`There are no ${action.payload} Pokémons yet :(`)
+
+            return {
+                ...state,
+                pokemons: filteredByType
             }
         }
 

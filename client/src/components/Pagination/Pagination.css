@@ -1,8 +1,13 @@
 .paginationBar {
+    display: flex;
+    flex-wrap: wrap;
     height: auto;
     width:fit-content;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
     background-color: #EEEEA5;
-    padding: 0.3rem 2rem;
+    padding: 0.3rem 1.2rem;
     border-radius: 50px;
 }
 
@@ -24,8 +29,40 @@
     transition: ease-in 0.1s;
 }
 
+.buttonPag {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    transition: ease-in 0.2s;
+}
+
+.buttonPag:hover {
+    background-color: #ffffa0;
+    transition: ease-in 0.1s;
+}
+
+.buttonPag img {
+    width: 90%;
+    height: 60%;
+}
+
+#nextButton {
+    transform: rotate(180deg);
+}
+
+#noButton {
+    display: none;
+}
+
 #active {
     background-color: #0D1371;
     color: #EEEEA5;
     transition: ease-in 0.5s;
 }
+

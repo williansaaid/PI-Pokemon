@@ -13,7 +13,14 @@ export default function Home (){
     const allPokemons = useSelector((state) => state.pokemons);
     const [currentPage, setCurrentPage] = useState(1);
     const [pokemonsPerPage, setPokemonsPerPage] = useState(12);
+    const [order, setOrder] = useState("");
     const [name, setName] = useState("");
+    const [pageNumberLimit, setPageNumberLimit] = useState(3);
+    const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(3);
+    const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
+    const [filterCall, setFilterCall] = useState(false);
+    const [searchCall, setSearchCall] = useState(false);
+
     const lastPokemonIndex = currentPage * pokemonsPerPage;
     const firstPokemonIndex = lastPokemonIndex - pokemonsPerPage;
     const currentPokemons = allPokemons.slice(firstPokemonIndex, lastPokemonIndex);
@@ -25,35 +32,44 @@ export default function Home (){
         }
     },[]);
 
-    function handleReloadPage(event){
-        event.preventDefault();
+    function handleReloadPage(){
+        dispatch(cleanPokemonsHome())
         dispatch(getAllPokemons());
     }
 
     function handleFilterType(event){
-        dispatch(filterTypePokemon(event.target.value))
+        dispatch(filterTypePokemon(event.target.value));
+        setCurrentPage(1);
+        setFilterCall(true);
+        setMaxPageNumberLimit(3);
+        setMinPageNumberLimit(0);
     }
 
     function handleFilterAlphabetic(event){
         event.preventDefault();
         dispatch(filterAlphabetic(event.target.value))
         setCurrentPage(1);
+        setOrder(`Order ${event.target.value}`);
     }
 
     function handleFilterAttack(event){
         event.preventDefault();
         dispatch(filterByAttack(event.target.value))
         setCurrentPage(1);
+        setOrder(`Order ${event.target.value}`);
     }
 
     function handleFilterDefense(event){
         event.preventDefault();
         dispatch(filterByDefense(event.target.value))
         setCurrentPage(1);
+        setOrder(`Order ${event.target.value}`);
     }
 
     function handleFilterCreation(event){
-        dispatch(filterByCreation(event.target.value))
+        dispatch(filterByCreation(event.target.value));
+        setCurrentPage(1);
+        setOrder(`Order ${event.target.value}`);
     }
 
     function handleSearchInput(event){
@@ -63,10 +79,32 @@ export default function Home (){
 
     function handleSearchButton(event){
         event.preventDefault();
-        name.length > 0 ? dispatch(getPokemonByName(name)) : alert("You can not find a Pokémon without name ;)");
+        setSearchCall(true);
+        if(name.length > 0){
+            dispatch(cleanPokemonsHome());
+            dispatch(getPokemonByName(name))
+        } else alert("You can not find a Pokémon without name ;)");
+        if(allPokemons.length === 0){
+            dispatch(getAllPokemons());
+        }
         setCurrentPage(1);
         setName("");
     }
+
+    useEffect(()=>{
+        if(allPokemons.length === 0 && filterCall){
+            alert(`There are no Pokémons with that type yet :(`);
+            dispatch(filterTypePokemon("allTypes"));
+            setCurrentPage(1);
+            setMaxPageNumberLimit(3);
+            setMinPageNumberLimit(0);
+            setFilterCall(false);
+        }
+        if(allPokemons.length === 0 && searchCall){
+            dispatch(getAllPokemons())
+            setSearchCall(false);
+        }
+    },[allPokemons])
 
     return (
         <div className="home">
@@ -98,6 +136,11 @@ export default function Home (){
                                 pokemonsPerPage={pokemonsPerPage}
                                 currentPage={currentPage}
                                 setCurrentPage={setCurrentPage}
+                                pageNumberLimit={pageNumberLimit}
+                                maxPageNumberLimit={maxPageNumberLimit}
+                                setMaxPageNumberLimit={setMaxPageNumberLimit}
+                                minPageNumberLimit={minPageNumberLimit}
+                                setMinPageNumberLimit={setMinPageNumberLimit}
                             />
                         </div>
                     </div> :
