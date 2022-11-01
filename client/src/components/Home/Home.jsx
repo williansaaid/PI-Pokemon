@@ -33,7 +33,8 @@ export default function Home (){
     },[]);
 
     function handleReloadPage(){
-        dispatch(cleanPokemonsHome())
+        dispatch(cleanPokemonsHome());
+        setFilterCall(false);
         dispatch(getAllPokemons());
     }
 
@@ -80,12 +81,15 @@ export default function Home (){
     function handleSearchButton(event){
         event.preventDefault();
         setSearchCall(true);
-        if(name.length > 0){
-            dispatch(cleanPokemonsHome());
-            dispatch(getPokemonByName(name))
-        } else alert("You can not find a Pokémon without name ;)");
-        if(allPokemons.length === 0){
-            dispatch(getAllPokemons());
+        try {
+            if(name.length > 0){
+                dispatch(cleanPokemonsHome());
+                dispatch(getPokemonByName(name))
+            } else alert("You can not find a Pokémon without name ;)");
+        } catch (error) {
+            if(allPokemons.length === 0){
+                dispatch(getAllPokemons());
+            }
         }
         setCurrentPage(1);
         setName("");
@@ -93,16 +97,16 @@ export default function Home (){
 
     useEffect(()=>{
         if(allPokemons.length === 0 && filterCall){
+            setFilterCall(false);
             alert(`There are no Pokémons with that type yet :(`);
             dispatch(filterTypePokemon("allTypes"));
             setCurrentPage(1);
             setMaxPageNumberLimit(3);
             setMinPageNumberLimit(0);
-            setFilterCall(false);
         }
         if(allPokemons.length === 0 && searchCall){
-            dispatch(getAllPokemons())
             setSearchCall(false);
+            dispatch(getAllPokemons())
         }
     },[allPokemons])
 
