@@ -21,7 +21,7 @@ const getGeneralInfoFromAPI = async () => {
         })
     }
     return allPokemons;
-}
+};
 
 const getGeneralInfoFromDB = async () => {
     const pokemonDb = await Pokemon.findAll({
