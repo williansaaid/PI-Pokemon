@@ -6,6 +6,7 @@ import NavBar from "../NavBar/NavBar";
 import PokemonCard from "../PokemonCard/PokemonCard";
 import "./Home.css"
 import Pagination from "../Pagination/Pagination";
+import Footer from "../Footer/Footer";
 
 export default function Home (){
 
@@ -122,6 +123,7 @@ export default function Home (){
                 handleSearchInput={handleSearchInput}
                 handleSearchButton={handleSearchButton}
             />
+            <div className="main">
             {
                 currentPokemons.length > 0 && typeof currentPokemons === "object" ?
                     <div id="renderPokemons">
@@ -152,6 +154,8 @@ export default function Home (){
                         <img src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif" alt="Loading gif" id="gif"/> :
                         <img src="https://media.tenor.com/wWiwC0p518wAAAAC/nothing-no.gif" alt="None gif" id="gifNone"/>
             }
+            </div>
+            <Footer/>
         </div>
     )
 }

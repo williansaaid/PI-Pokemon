@@ -1,5 +1,6 @@
 import React from "react";
 import "./PokemonDetail.css";
+import Footer from "../Footer/Footer"
 import { cleanDetail, getPokemonDetail } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,6 +21,7 @@ const PokemonDetail = (props) => {
 
     return (
         <div className="detailWraper">
+            <div className="wrapperDetail">
             {
                 pokemon !== undefined && Object.keys(pokemon).length > 1 ?
                 <div className="detailContainer">
@@ -66,6 +68,8 @@ const PokemonDetail = (props) => {
                 </div> :
                 <img src="https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif" alt="Loading gif" id="gif"/>
             }
+            </div>
+            <Footer/>
         </div>
     )
 };

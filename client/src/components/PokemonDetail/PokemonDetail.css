@@ -5,6 +5,10 @@
     margin: 0;
 }
 
+.wrapperDetail {
+    min-height: 100vh;
+}
+
 .detailContainer {
     background: radial-gradient(black, #0D1371);
     color: aliceblue;
@@ -90,6 +94,7 @@
 }
 
 #gif {
+    padding-top: 8rem;
     width: 6rem;
 }
 
