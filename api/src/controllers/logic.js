@@ -5,12 +5,12 @@ const limit = 50;
 let url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}`;
 
 const getGeneralInfoFromAPI = async () => {
-    const responseApi = await axios.get(url);
+    const responseApi = await axios.get(url, { headers: { "Accept-Encoding": "gzip,deflate,compress" } });
     const result = responseApi.data.results;
     const allPokemons = [];
 
     for(let pk of result){
-        const pkGeneral = await axios.get(pk.url);
+        const pkGeneral = await axios.get(pk.url, { headers: { "Accept-Encoding": "gzip,deflate,compress" } });
         allPokemons.push({
             id: pkGeneral.data.id,
             image: pkGeneral.data.sprites.other["official-artwork"].front_default,
@@ -53,7 +53,7 @@ const getDetailedInfoFromAPI = async (param) => {
     const detailsUrl = `https://pokeapi.co/api/v2/pokemon/${param}`;
     let response;
     try {
-        const responseApi = await axios.get(detailsUrl);
+        const responseApi = await axios.get(detailsUrl, { headers: { "Accept-Encoding": "gzip,deflate,compress" } });
         const pkDetail = await responseApi.data;
         return response = {
             id: pkDetail.id,
@@ -125,7 +125,7 @@ const getDetailedInfoPokemon = async (param) => {
 
 const getPokemonTypes = async () => {
     let url = 'https://pokeapi.co/api/v2/type';
-    const responseApi = await axios.get(url);
+    const responseApi = await axios.get(url, { headers: { "Accept-Encoding": "gzip,deflate,compress" } });
     const result = responseApi.data.results;
 
     result.map(e => {
